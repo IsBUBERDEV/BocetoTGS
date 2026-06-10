@@ -7,13 +7,19 @@ public class IAAnalizador {
         int puntaje = 0;
 
         if (datos.getNivelAgua() > 3.5)
-            puntaje += 40;
+            puntaje += 30;
 
         if (datos.getLluvia() > 80)
-            puntaje += 40;
+            puntaje += 30;
 
-        if (datos.isObstruccion())
-            puntaje += 20;
+        if (datos.getDeficit() > 10)
+            puntaje += 25;
+
+        if (datos.getCanal().getEstado() == EstadoCanal.OBSTRUIDO)
+            puntaje += 15;
+
+        if (datos.getCanal().getEstado() == EstadoCanal.ROTO)
+            puntaje += 25;
 
         if (puntaje >= 80)
             return "ALTO";

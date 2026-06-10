@@ -2,14 +2,25 @@ package org.eltrioquepesa.model;
 
 public class DatosMonitoreo {
 
+    private Canal canal;
     private double nivelAgua;
     private double lluvia;
-    private boolean obstruccion;
+    private double entrada;
+    private double deficit;
+    private int minutosCiclo;
 
-    public DatosMonitoreo(double nivelAgua, double lluvia, boolean obstruccion) {
+    public DatosMonitoreo(Canal canal, double nivelAgua, double lluvia,
+                          double entrada, double deficit, int minutosCiclo) {
+        this.canal = canal;
         this.nivelAgua = nivelAgua;
         this.lluvia = lluvia;
-        this.obstruccion = obstruccion;
+        this.entrada = entrada;
+        this.deficit = deficit;
+        this.minutosCiclo = minutosCiclo;
+    }
+
+    public Canal getCanal() {
+        return canal;
     }
 
     public double getNivelAgua() {
@@ -20,14 +31,28 @@ public class DatosMonitoreo {
         return lluvia;
     }
 
-    public boolean isObstruccion() {
-        return obstruccion;
+    public double getEntrada() {
+        return entrada;
+    }
+
+    public double getDeficit() {
+        return deficit;
+    }
+
+    public int getMinutosCiclo() {
+        return minutosCiclo;
     }
 
     @Override
     public String toString() {
-        return "Nivel Agua: " + nivelAgua +
-                " m | Lluvia: " + lluvia +
-                " mm | Obstrucción: " + obstruccion;
+        return "Canal: " + canal.getNombre() +
+                " (" + canal.getZona() + ")" +
+                " | Estado: " + canal.getEstado() +
+                " | Nivel Agua: " + String.format("%.2f", nivelAgua) + " m" +
+                " | Lluvia: " + String.format("%.1f", lluvia) + " mm" +
+                " | Entrada: " + String.format("%.1f", entrada) +
+                " | Cap. drenaje: " + String.format("%.1f", canal.getCapacidadEfectiva()) +
+                " | Déficit: " + String.format("%.1f", deficit) +
+                " | Factor tiempo: " + minutosCiclo + " min";
     }
 }

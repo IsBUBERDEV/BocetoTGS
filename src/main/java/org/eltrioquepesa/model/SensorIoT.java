@@ -1,26 +1,26 @@
 package org.eltrioquepesa.model;
 
-import java.util.Random;
-
 public class SensorIoT {
 
-    private String ubicacion;
-    private Random random;
+    private Canal canal;
+    private static long inicio = System.currentTimeMillis();
 
-    public SensorIoT(String ubicacion) {
-        this.ubicacion = ubicacion;
-        this.random = new Random();
+    public SensorIoT(Canal canal) {
+        this.canal = canal;
     }
 
     public double medirNivelAgua() {
-        return 0.5 + random.nextDouble() * 4.5;
+        return canal.getNivelAgua();
     }
 
     public double medirLluvia() {
-        return random.nextDouble() * 150;
+        double segundos = (System.currentTimeMillis() - inicio) / 1000.0;
+        double maximo = 150;
+
+        return maximo * (Math.sin(segundos * 0.4) + 1) / 2;
     }
 
-    public String getUbicacion() {
-        return ubicacion;
+    public Canal getCanal() {
+        return canal;
     }
 }

@@ -10,15 +10,15 @@ public class PlataformaCentral {
         alerta = new Alerta();
     }
 
-    public void procesar(DatosMonitoreo datos) {
+    public synchronized void procesar(DatosMonitoreo datos) {
 
-        System.out.println("\n===== DATOS RECIBIDOS =====");
+        System.out.println("\n===== DATOS RECIBIDOS [" + Thread.currentThread().getName() + "] =====");
         System.out.println(datos);
 
         String riesgo = analizador.predecirRiesgo(datos);
 
         System.out.println("Riesgo calculado: " + riesgo);
 
-        alerta.emitir(riesgo);
+        alerta.emitir(riesgo, datos);
     }
 }
